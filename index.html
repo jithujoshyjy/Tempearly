@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tempearly Test</title>
+    <script type="module" src="script.js"></script>
+</head>
+
+<body>
+    <todo-list></todo-list>
+    <template id="todo-list" data--todos data--todo-count data--create-todo data--edit-todo data--remove-todo
+        data--todo-entry-field data--todo-entry-idx-field>
+        <style>
+            todo-list {
+                background-color: azure;
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 10px 35px;
+                border-radius: 5px;
+                min-width: 200px;
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+                border: 1.5px solid lightskyblue;
+            }
+
+            todo-list form {
+                min-width: 100%;
+            }
+
+            todo-list input {
+                outline: none;
+            }
+
+            todo-list button {
+                background-color: white;
+                border-radius: 4px;
+                border: 1px solid forestgreen;
+                font-size: medium;
+                cursor: pointer;
+                color: forestgreen;
+            }
+
+            todo-list h5 {
+                min-width: 100%;
+                text-align: left;
+                font-size: small;
+                margin-bottom: 5px;
+            }
+
+            todo-list ol {
+                margin-top: 10px;
+                font-size: small;
+                min-width: 100%;
+            }
+
+            todo-list ol li:not(:first-of-type) {
+                margin-top: 10px;
+            }
+
+            todo-list ol li>div {
+                display: flex;
+            }
+
+            todo-list div.todo-settings {
+                margin-left: 15px;
+                display: flex;
+                gap: 10px;
+            }
+
+            todo-list a.edit-todo {
+                color: chocolate;
+            }
+
+            todo-list a.remove-todo {
+                color: brown;
+            }
+        </style>
+        <form name="todos" data--create-todo="event.submit">
+            <label>
+                <h5>Create Todo</h5>
+                <input name="todo-entry-field" data--todo-entry-field="this" autocomplete="off" />
+                <input type="number" data--todo-entry-idx-field="this" name="todo-entry-idx" value="0" hidden />
+            </label>
+            <button type="submit">+</button>
+        </form>
+        <h5>
+            Active Todos
+            <sup>
+                (<data--todo-count></data--todo-count>)
+            </sup>
+        </h5>
+        <ol>
+            <data--todos each="data--todo" index="data--todo-idx">
+                <li>
+                    <div>
+                        <data--todo></data--todo>
+                        <div class="todo-settings">
+                            <a class="edit-todo" href="#" data--todo-idx="data-idx"
+                                data--edit-todo="event.click">[edit]</a>
+                            <a class="remove-todo" href="#" data--todo-idx="data-idx"
+                                data--remove-todo="event.click">[x]</a>
+                        </div>
+                    </div>
+                </li>
+            </data--todos>
+        </ol>
+    </template>
+</body>
+
+</html>
