@@ -1,4 +1,4 @@
-import tempearly, { $signal, $computed, $props } from "./index.js"
+import tempearly, { $signal, $computed, $props } from "../src/tempearly.js"
 
 const todos = $signal([])
 const todoList = tempearly.new({

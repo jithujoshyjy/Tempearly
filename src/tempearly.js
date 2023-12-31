@@ -181,6 +181,7 @@ export function $props(tempObj) {
     throw new TypeError(`[Error: Tempearly] Expected a Tempearly Object instead found '${String(tempObj)}'`)
 }
 
+let isInitial = true
 export default {
     /**
      * @param {{
@@ -253,8 +254,12 @@ export default {
                 const templateAttributes = Object
                     .keys(templateElement.dataset)
                     .filter(x => (/^[A-Z]/).test(x))
+                
+                if (isInitial) {
+                    initializeTemplateStyles(templateContent, template)
+                    isInitial = false
+                }
 
-                initializeTemplateStyles(templateContent, template)
                 placeInstanceChildrenInTemplateSlots(instanceElement, templateContent)
 
                 interpolateValues(
@@ -387,7 +392,7 @@ function placeInstanceChildrenInTemplateSlots(instanceElement, templateContent) 
      */
     const templateSlots = els("slot", templateContent)
     let defaultSlot = null
-    
+
     for (const templateSlot of templateSlots) {
         const slotName = templateSlot.name
         if (!slotName) {
